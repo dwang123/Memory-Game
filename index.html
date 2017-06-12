@@ -125,6 +125,16 @@ div#memory_board > div{
     </header>
 
       <!--4X4 Tile Board-->
+      <div class="container" id="login">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 id = "welcomeText"></h2>
+          </div>
+        </div>
+      </div>
+      
+      
+      
       <div id ="test"></div>
     <div class="container">
         <div class="row">
@@ -207,6 +217,8 @@ div#memory_board > div{
 <script>
   //This is to test the database is connected.
   var provider = new firebase.auth.GoogleAuthProvider();
+  var user;
+  
   function signIn(){
     // Needs to host on github in order to work
     console.log("sign-in popup")
@@ -214,7 +226,8 @@ div#memory_board > div{
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = result.credential.accessToken;
     // The signed-in user info.
-    var user = result.user;
+    user = result.user;
+    showWelcomeContainer();
     console.log(user.displayName);
     // ...
 }).catch(function(error) {
@@ -229,6 +242,10 @@ div#memory_board > div{
 });
   }
   
+  function showWelcomeContainer() {
+	$("#login").hide();
+	$("#welcome").show();
+	$("#welcomeText").html("Hello, " + user.displayName);
 //Everything under here I was messing around; ignore
 
   // Get a reference to the database service
