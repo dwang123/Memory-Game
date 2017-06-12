@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--
+I HOSTED THIS ON GITHUB TO GET THE SIGN IN PAGE WORKING:
+        Link: https://dwang123.github.io/Memory-Game/#
+        -->
 <html lang="en">
     <head>
       <meta charset="utf-8">
@@ -6,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-      <!--script src="MOMemeoryGenerator.js"></script>
-        <script src="memoryGameDX.js"></script>-->
+      <script src="MOMemoryGenerator.js"></script>
+        <script src="memoryGameDX.js"></script>
         <title> Memory Game - Derek, Derrick, Matthias</title>
       <!-- Bootstrap Core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
         <style>
@@ -186,6 +190,7 @@ div#memory_board > div{
             
             }
 </script>
+<!--Connecting with Firebase and Google Log in: Don't touch or change this!-->
 <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -210,6 +215,7 @@ div#memory_board > div{
     var token = result.credential.accessToken;
     // The signed-in user info.
     var user = result.user;
+    console.log(user.displayName);
     // ...
 }).catch(function(error) {
   // Handle Errors here.
@@ -222,7 +228,10 @@ div#memory_board > div{
   // ...
 });
   }
- // Get a reference to the database service
+  
+//Everything under here I was messing around; ignore
+
+  // Get a reference to the database service
   //   var database = firebase.database();
   
   // var userObject = ["Hello", "123"];
