@@ -10,11 +10,11 @@ I HOSTED THIS ON GITHUB TO GET THE SIGN IN PAGE WORKING:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-      <script src=" https://dwang123.github.io/Memory-Game/memoryGameDX.js"></script>
-        <script src="https://dwang123.github.io/Memory-Game/MOMemoryGenerator.js"></script>
+      <script src="MOMemoryGenerator.js"></script>
+        <script src="memoryGameDX.js"></script>
         <title> Memory Game - Derek, Derrick, Matthias</title>
       <!-- Bootstrap Core CSS -->
-    <link href="https://dwang123.github.io/Memory-Game/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://dwang123.github.io/Memory-Game/css/bootstrap.min.css " rel="stylesheet">
 
     <!-- Custom CSS -->
         <style>
@@ -125,16 +125,6 @@ div#memory_board > div{
     </header>
 
       <!--4X4 Tile Board-->
-      <div class="container" id="login">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 id = "welcomeText"></h2>
-          </div>
-        </div>
-      </div>
-      
-      
-      
       <div id ="test"></div>
     <div class="container">
         <div class="row">
@@ -217,8 +207,6 @@ div#memory_board > div{
 <script>
   //This is to test the database is connected.
   var provider = new firebase.auth.GoogleAuthProvider();
-  var user;
-  
   function signIn(){
     // Needs to host on github in order to work
     console.log("sign-in popup")
@@ -226,9 +214,7 @@ div#memory_board > div{
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = result.credential.accessToken;
     // The signed-in user info.
-    user = result.user;
-    showWelcomeContainer();
-    console.log(user.displayName);
+    var user = result.user;
     // ...
 }).catch(function(error) {
   // Handle Errors here.
@@ -242,10 +228,6 @@ div#memory_board > div{
 });
   }
   
-  function showWelcomeContainer() {
-	$("#login").hide();
-	$("#welcome").show();
-	$("#welcomeText").html("Hello, " + user.displayName);
 //Everything under here I was messing around; ignore
 
   // Get a reference to the database service
