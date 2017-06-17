@@ -3,6 +3,10 @@
 I HOSTED THIS ON GITHUB TO GET THE SIGN IN PAGE WORKING:
         Link: https://dwang123.github.io/Memory-Game/#
         -->
+<!--
+    What happened to the functions I created yesterday? I laid down some basework and saved the changes periodically, but now they aren't there. *redone - but still curious*
+    Good-looking UI btw
+-->
 <html lang="en">
     <head>
       <meta charset="utf-8">
@@ -10,11 +14,11 @@ I HOSTED THIS ON GITHUB TO GET THE SIGN IN PAGE WORKING:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-      <script src=" https://dwang123.github.io/Memory-Game/MOMemoryGenerator.js"></script>
-        <script src="https://dwang123.github.io/Memory-Game/memoryGameDX.js "></script>
+      <!--script src="MOMemeoryGenerator.js"></script>
+        <script src="memoryGameDX.js"></script>-->
         <title> Memory Game - Derek, Derrick, Matthias</title>
       <!-- Bootstrap Core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
         <style>
@@ -64,6 +68,10 @@ div#memory_board > div{
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li id="totalFlips">
+                        Cards Flipped: 0
+                    </li>
+                    
                     <li>
                         <a href="#">About</a>
                     </li>
@@ -90,6 +98,7 @@ div#memory_board > div{
         </ol>
 
         <!-- Wrapper for Slides -->
+        <!-- Hey: what are these errors? I'm sure you know what you're doing, but I'm still curious -->
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
@@ -130,65 +139,189 @@ div#memory_board > div{
         <div class="row">
             <div class="col-lg-12">
               <div id="memory_board">
-                <div style="width: 24px;">1</div>
-                <div style="width:24px;">2</div>
-                <div style="width: 24px;">3</div>
-                <div style="width: 24px;">4</div>
-                <div style="width: 24px;">5</div>
-                <div style="width: 24px;">6</div>
-                 <div style="width: 24px;">7</div>
-                <div style="width:24px;">8</div>
-                <div style="width: 24px;">9</div>
-                <div style="width: 24px;">10</div>
-                <div style="width: 24px;">11</div>
-                <div style="width: 24px;">12</div>
-                 <div style="width: 24px;">13</div>
-                <div style="width:24px;">14</div>
-                <div style="width: 24px;">15</div>
-                <div style="width: 24px;">16</div>
+                <div class="cards" id="card0_0" onclick="flipCard(0_0)" style="width: 24px;">1</div>
+                <div class="cards" id="card0_1" onclick="flipCard(0_1)" style="width:24px;">2</div>
+                <div class="cards" id="card0_2" onclick="flipCard(0_2)" style="width: 24px;">3</div>
+                <div class="cards" id="card0_3" onclick="flipCard(0_3)" style="width: 24px;">4</div>
+                <div class="cards" id="card1_0" onclick="flipCard(1_0)" style="width: 24px;">5</div>
+                <div class="cards" id="card1_1" onclick="flipCard(1_1)" style="width: 24px;">6</div>
+                <div class="cards" id="card1_2" onclick="flipCard(1_2)" style="width: 24px;">7</div>
+                <div class="cards" id="card1_3" onclick="flipCard(1_3)" style="width:24px;">8</div>
+                <div class="cards" id="card2_0" onclick="flipCard(2_0)" style="width: 24px;">9</div>
+                <div class="cards" id="card2_1" onclick="flipCard(2_1)" style="width: 24px;">10</div>
+                <div class="cards" id="card2_2" onclick="flipCard(2_2)" style="width: 24px;">11</div>
+                <div class="cards" id="card2_3" onclick="flipCard(2_3)" style="width: 24px;">12</div>
+                <div class="cards" id="card3_0" onclick="flipCard(3_0)" style="width: 24px;">13</div>
+                <div class="cards" id="card3_1" onclick="flipCard(3_1)" style="width:24px;">14</div>
+                <div class="cards" id="card3_2" onclick="flipCard(3_2)" style="width: 24px;">15</div>
+                <div class="cards" id="card3_3" onclick="flipCard(3_3)" style="width: 24px;">16</div>
               </div>
            </div>
           </div>
           </div>
-          <!--<div id="first">First</div>-->
-          <!--<div id="last">Last</div>-->
-          <!--<div id="username">User</div>-->
         <script>
-
-            var dimensions = [1,1];
+            //This formatting could be better: Like the order of function and such (my fault, but it's a good job if frustrated and can't figure stuff out)
+            //How do you choose the card that the user clicked? Use ids... maybe screw user-chosen board size?
+            var cardsFlipped = 0
+            var allCardsFlipped = 0
+            var cardsAreEqual = 0
+            var lastCardFlipped = -1;
             var boardObject = {
-            
             };
-            setLevel1();
+            function getRandomInt(min, max) {
+              return Math.floor(Math.random() * (max + 1 - min)) + min; //Since Math.random() goes between 0 and 1, I
+                                                                       //edit it to go between min and max, inclusive.
+            }
+                
+            pickGame();
+            setLevel1(); //call this in pickgame function?
             //Call this with a button: we'll have two buttons to select which
             //game we play.
             //We (Matthias and Derrick) were planning on having the memory game
             //where you get a sequence of cards in order and have to repeat
             //the selection, as well as the normal pair-up game.
-            function setLevel1(){
-            var level = prompt("Pick a level number from 1 to 3.");
-            if (level==1){
-                //Set GUI stuff
-                dimensions = [2,3];
-            } else if (level==2){
-                //Set GUI stuff
-                dimensions = [3,4]
-            } else if (level==3){
-                //Set GUI stuff
-                dimensions = [4,6]
-            } else {
-                alert("Try again...");
-                setLevel1();
+            function pickGame() {
+                var game = prompt("Pick a memory game: either Regular or Order Memory") //edit this if better phrasing
+                if (game=="Regular"){
+                    setLevel1();
                 }
-            for(var i = 0; i < dimensions[0];i++){
-                for(var j = 0; j < dimensions[1];j++){
-                    boardObject["card" + i + "_" + j] = [0,-1];
+                else if (game=="Order Memory"){
+                    setLevel2();
                 }
+                else {
+                    alert("Check your Caps or spelling")
+                    function pickGame()
+                
+            
+            
+            //Functions for RegularMemory
+            
+            function setLevel1()
+                
+            var numbArray = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+            var cardArray = [];
+            
+            for(var i = 0; i < 4;i++){
+              for var j = 0; j < 4; j++){
+                cardArray.push(["i","j"]);
+              }
+            }
+            console.log(cardArray); //These two should help keep track of which cards/numbers have been used
+            
+            var randInt1 = 0;
+            var randInt2 = 0;
+            var randInt3 = 0; //Keeps me from defining variables in a loop.
+            
+            for(var i = 0; i < 8;i++){
+              
+              randInt3 = getRandomInt(0,numbArray.length - 1);
+              numbArray.splice(randInt3); //This picks a number from the numbArray and removes it afterward.
+              
+              randInt1 = getRandomInt(0,cardArray.length - 1);
+              boardObject["card" + cardArray[randInt1[0]] + "_" + cardArray[randInt1[1]]] = [randInt3 + 1, 0];
+              cardArray.splice(randInt1);
+              
+              randInt2 = getRandomInt(0,cardArray.length - 1);
+              boardObject["card" + cardArray[randInt2[0]] + "_" + cardArray[randInt2[1]]] = [randInt3 + 1, 0]
+              cardArray.splice(randInt2); //These two pick out two random cards from cardArray, then removes them from said array.
+              
+    
             }
             console.log(boardObject.card0_0);
-            
-            
+            //Hopefully the board should be set up now, with each attribute (card2_3) being an array of a random number
+            //and whether it was flipped or not.
             }
+            
+            function flipCard(CardId) {
+                //I've commented out a possible method to choosing the card that the user clicked
+                var yourCard = "card" + CardId;
+                //CardId is found above in the individual divs
+            boardObject[yourCard][1] = 1;
+            if (boardObject[yourCard][0] == lastCardFlipped){
+              cardsAreEqual = 1;
+            } else {
+              cardsAreEqual = 0;
+              lastCardFlipped = boardObject["card" + i + "_" + j][0]; //This should detect if the current card is equivalent
+                                                                      //to the previous one
+            }
+            //We need to sync up our variable names: here I just left it for now - ok lol what do u want 2 make it lol
+            //How do we tell what card is selected? idk I was wondering that also - I tried the method above
+            
+            //Set attribute of card from 0 to 1 to show that it's flipped
+            
+            cardsFlipped = cardsFlipped + 1; //added some semicolons
+            "Total Cards Flipped: " + cardsFlipped = document.getElementById("totalFlips")
+            if (cardsFlipped % 2 = 0) {
+            checkMatch();
+            }
+        }
+        function checkMatch() {
+            if (cardsAreEqual = 1) {
+                clearCards();
+;            }
+            else {
+                flipCardToBack();
+            }
+        }
+            function clearCards() {
+            document.getElementById("")
+            //set boxsize to 0
+            element.setAttribute(size, 0)
+            
+            if(allCardsFlipped = true){
+            winScreen();
+            }
+            }
+            //added some close curly braces here
+            //Functions for OrderMemory Game
+            
+            function setLevel2(){
+                alert("You will be shown 5 cards. Memorize them and be able to recite them to win!")
+                showCards();
+                flipCardToBack();
+                prompt("What were the cards? Only put the number of the card, with Aces as 1 and face cards as 11, 12, and 13 (e.g. Jack would be 11, King 13) Separate your #s with commas please!");
+                checkWin();
+            }
+            function showCards(){
+                //set card's attribute from 0 to 1 to turn it over
+            }
+        //Universal Functions
+        function checkWin(){
+                document.getElementsByClassName("cards");
+                var win = //If combined size of boxes is 0, you win - Maybe use class of Cards I gave everything?
+                if // Something like this?(cards.width = 0 && cards.height = 0) {
+                    winScreen();
+                }
+                else if {
+                    //playing memory game of yours
+                }
+                else if {
+                    //Got card order right - idk how to tell that eggsD
+                }
+                else {
+                    alert("Y O U ' R E A L O S E R")
+                }
+                //No Idea how to do this
+                cardsFlipped = 0
+                //set sizes of boxes/cards to normal again
+            }
+            
+        
+        }
+        
+        function flipCardToBack() {
+            //set attribute of card from 1 to 0 to flip it back over
+        }
+        
+        function winScreen() {
+            alert("You Won! :D")
+            //reset stuff
+            cardsFlipped = 0;
+            allCardsFlipped = 0;
+            cardsAreEqual = 0;
+            lastCardFlipped = -1;
+        }
+        
 </script>
 <!--Connecting with Firebase and Google Log in: Don't touch or change this!-->
 <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
@@ -228,7 +361,7 @@ div#memory_board > div{
 });
   }
   
-//Everything under here I was messing around; ignore
+//Everything under here I was messing around; ignore (Is this Derrick or Derek? :))
 
   // Get a reference to the database service
   //   var database = firebase.database();
