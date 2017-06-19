@@ -17,7 +17,7 @@ I HOSTED THIS ON GITHUB TO GET THE SIGN IN PAGE WORKING:
       
         <title> Memory Game - Derek, Derrick, Matthias</title>
       <!-- Bootstrap Core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href=""https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
         <style>
@@ -41,6 +41,7 @@ div#memory_board > div{
 	font-size:25px;
 	text-align:center;
 	line-height:70px ;
+	background-size: 70px 70px;
 }
 /*shifts sign in button into place*/
 .navbar-brand{
@@ -106,21 +107,21 @@ div#memory_board > div{
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 1</h2>
+                    <h2 id="NameBox">Caption 1</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 2</h2>
+                    <h2 id="ClickBox">Clicks Used: 0</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 3</h2>
+                    <h2 id="WinBox">Total Wins: 0</h2>
                 </div>
             </div>
         </div>
@@ -141,22 +142,22 @@ div#memory_board > div{
         <div class="row">
             <div class="col-lg-12">
               <div id="memory_board">
-                <div class="cards" id="card0_0" style="width: 24px;">1</div>
-                <div class="cards" id="card0_1" style="width:24px;">2</div>
-                <div class="cards" id="card0_2" style="width: 24px;">3</div>
-                <div class="cards" id="card0_3" style="width: 24px;">4</div>
-                <div class="cards" id="card1_0" style="width: 24px;">5</div>
-                <div class="cards" id="card1_1" style="width: 24px;">6</div>
-                <div class="cards" id="card1_2" style="width: 24px;">7</div>
-                <div class="cards" id="card1_3" style="width: 24px;">8</div>
-                <div class="cards" id="card2_0" style="width: 24px;">9</div>
-                <div class="cards" id="card2_1" style="width: 24px;">10</div>
-                <div class="cards" id="card2_2" style="width: 24px;">11</div>
-                <div class="cards" id="card2_3" style="width: 24px;">12</div>
-                <div class="cards" id="card3_0" style="width: 24px;">13</div>
-                <div class="cards" id="card3_1" style="width:24px;">14</div>
-                <div class="cards" id="card3_2" style="width: 24px;">15</div>
-                <div class="cards" id="card3_3" style="width: 24px;">16</div>
+                <div class="cards" id="card0_0" style="width: 24px;"></div>
+                <div class="cards" id="card0_1" style="width:24px;"></div>
+                <div class="cards" id="card0_2" style="width: 24px;"></div>
+                <div class="cards" id="card0_3" style="width: 24px;"></div>
+                <div class="cards" id="card1_0" style="width: 24px;"></div>
+                <div class="cards" id="card1_1" style="width: 24px;"></div>
+                <div class="cards" id="card1_2" style="width: 24px;"></div>
+                <div class="cards" id="card1_3" style="width: 24px;"></div>
+                <div class="cards" id="card2_0" style="width: 24px;"></div>
+                <div class="cards" id="card2_1" style="width: 24px;"></div>
+                <div class="cards" id="card2_2" style="width: 24px;"></div>
+                <div class="cards" id="card2_3" style="width: 24px;"></div>
+                <div class="cards" id="card3_0" style="width: 24px;"></div>
+                <div class="cards" id="card3_1" style="width: 24px;"></div>
+                <div class="cards" id="card3_2" style="width: 24px;"></div>
+                <div class="cards" id="card3_3" style="width: 24px;"></div>
               </div>
            </div>
           </div>
@@ -178,11 +179,11 @@ div#memory_board > div{
             document.getElementById("card3_1").onclick = function() {flipDat("3_1")};
             document.getElementById("card3_2").onclick = function() {flipDat("3_2")};
             document.getElementById("card3_3").onclick = function() {flipDat("3_3")};
-            console.log("qwertyuiop...");
             //This formatting could be better: Like the order of function and such (my fault, but it's a good job if frustrated and can't figure stuff out)
             //How do you choose the card that the user clicked? Use ids... maybe screw user-chosen board size?
-            var cardsFlipped = 0;
-            var allCardsFlipped = 0;
+            var attemptNumber = 0;
+            var turnsUsed = 0;
+            var completedCards = 0;
             var cardsAreEqual = 0;
             var lastCardFlipped = -1;
             var lastCardFlippedID = "null";
@@ -194,6 +195,9 @@ div#memory_board > div{
             }
 
             //pickGame();
+            var Name = prompt("Please enter your name");
+            document.getElementById("NameBox").innerHTML = "Name: " + Name;
+
             setLevel1(); //call this in pickgame function?
             //Call this with a button: we'll have two buttons to select which
             //game we play.
@@ -261,12 +265,12 @@ div#memory_board > div{
             }
             
             function flipDat(CardId) {
-                //I've commented out a possible method to choosing the card that the user clicked
+              turnsUsed++;
+              document.getElementById("ClickBox").innerHTML = "Clicks Used: " + turnsUsed;
                 var yourCard = "card" + CardId;
-                console.log("doesItWork");
                 //CardId is found above in the individual divs
             if(boardObject[yourCard][1]==1){
-              //Set the card back to the default image
+              document.getElementById(yourCard).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
               boardObject[yourCard][1] = 0;
               lastCardFlipped = -1;
             } else {
@@ -278,6 +282,9 @@ div#memory_board > div{
               lastCardFlipped = boardObject[yourCard][0]; //This should detect if the current card is equivalent
                                                                       //to the previous one
             }
+            
+            //lastCardFlipped and lastCardFlippedID are 2 different variables
+            
             if (boardObject[yourCard][0] == 13){
               document.getElementById(yourCard).style.backgroundImage="url(https://gambit1204.files.wordpress.com/2010/07/ace_spades1.jpg)"; //Ace
             }else if (boardObject[yourCard][0] == 1){
@@ -307,11 +314,8 @@ div#memory_board > div{
             }
 
             
-            //Set attribute of card from 0 to 1 to show that it's flipped
-            
-            cardsFlipped = cardsFlipped + 1; //added some semicolons
-            document.getElementById("totalFlips").innerHTML = "Total Cards Flipped: " + cardsFlipped;
-            if (cardsFlipped % 2 === 0) {
+            document.getElementById("totalFlips").innerHTML = "Total Cards Flipped: " + turnsUsed;
+            if (turnsUsed % 2 === 0) {
             checkMatch(lastCardFlippedID,yourCard);
             lastCardFlippedID = "null";
             } else {
@@ -319,55 +323,79 @@ div#memory_board > div{
             }
           }
         }
-        function checkMatch(card1,card2) {
+        function checkMatch(card1,card2) {setTimeout(function(){
+            //if( $('img').css('background-image') == ('img').css('background-image') That's jQuery but it might work
             if (cardsAreEqual == 1) {
                 clearCards(card1,card2);
             }
             else {
-                flipCardsToBack(card1,card2);
+                flipCardsToBack(card1,card2); 
             }
+           }, 1000)
         }
             function clearCards(card1,card2) {
-            document.getElementById(card1).setAttribute("size",0);
-            document.getElementById(card2).setAttribute("size",0);
-           
+            document.getElementById(card2).style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg')";
+            document.getElementById(card1).style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg')";
+            //URL: https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg
+            console.log("BLAHWEFAW");
+            completedCards = completedCards + 2;
+            //If this doesn't work try thingy.style.width (and one for height) = "0px"
             
-            if(allCardsFlipped === true){
+            if(completedCards==16){
             winScreen();
             }
             }
             //added some close curly braces here
             //Functions for OrderMemory Game
             
-            function setLevel2(){
-                alert("You will be shown 5 cards. Memorize them and be able to recite them to win!");
-                showCards();
-                flipCardToBack();
-                prompt("What were the cards? Only put the number of the card, with Aces as 1 and face cards as 11, 12, and 13 (e.g. Jack would be 11, King 13) Separate your #s with commas please!");
-                checkWin();s
-            }
             function showCards(){
                 //set card's attribute from 0 to 1 to turn it over
             }
-        //Universal Functions
-        function checkWin(){
-            
-        
-        }
         
         function flipCardsToBack(card1,card2) {
             boardObject[card1][1]=0;
             boardObject[card2][1]=0;
-            
+            console.log("BLAHWEFAW");
+            if(attemptNumber === 0){
+            document.getElementById(card1).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
+            document.getElementById(card2).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
+            //URL: http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg
+            } else {
+            document.getElementById(card1).style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById(card2).style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            }
         }
         
         function winScreen() {
             alert("You Won! :D");
+            //http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif
             //reset stuff
-            cardsFlipped = 0;
-            allCardsFlipped = 0;
+            turnsUsed = 0;
+            completedCards = 0;
             cardsAreEqual = 0;
             lastCardFlipped = -1;
+            boardObject = {};
+            setLevel1();
+            attemptNumber++;
+            document.getElementById("WinBox").innerHTML = "Total Wins: " + attemptNumber;
+            document.getElementById("ClickBox").innerHTML = "Clicks Used: 0";
+            
+            document.getElementById("card0_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
         }
         
 </script>
