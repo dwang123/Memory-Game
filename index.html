@@ -42,10 +42,14 @@ div#memory_board > div{
 	font-size:25px;
 	text-align:center;
 	line-height:70px ;
+	background-size: 70px 70px;
 }
 /*shifts sign in button into place*/
 .navbar-brand{
   padding:5px;
+}
+#totalFlips{
+  color: white;
 }
 </style>
     </head>
@@ -73,7 +77,7 @@ div#memory_board > div{
                     </li>
                     
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">Pick Game</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -104,21 +108,21 @@ div#memory_board > div{
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 1</h2>
+                    <h2 id="NameBox">Caption 1</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 2</h2>
+                    <h2 id="ClickBox">Clicks Used: 0</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 3</h2>
+                    <h2 id="WinBox">Total Wins: 0</h2>
                 </div>
             </div>
         </div>
@@ -139,187 +143,260 @@ div#memory_board > div{
         <div class="row">
             <div class="col-lg-12">
               <div id="memory_board">
-                <div class="cards" id="card0_0" onclick="flipCard(0_0)" style="width: 24px;">1</div>
-                <div class="cards" id="card0_1" onclick="flipCard(0_1)" style="width:24px;">2</div>
-                <div class="cards" id="card0_2" onclick="flipCard(0_2)" style="width: 24px;">3</div>
-                <div class="cards" id="card0_3" onclick="flipCard(0_3)" style="width: 24px;">4</div>
-                <div class="cards" id="card1_0" onclick="flipCard(1_0)" style="width: 24px;">5</div>
-                <div class="cards" id="card1_1" onclick="flipCard(1_1)" style="width: 24px;">6</div>
-                <div class="cards" id="card1_2" onclick="flipCard(1_2)" style="width: 24px;">7</div>
-                <div class="cards" id="card1_3" onclick="flipCard(1_3)" style="width:24px;">8</div>
-                <div class="cards" id="card2_0" onclick="flipCard(2_0)" style="width: 24px;">9</div>
-                <div class="cards" id="card2_1" onclick="flipCard(2_1)" style="width: 24px;">10</div>
-                <div class="cards" id="card2_2" onclick="flipCard(2_2)" style="width: 24px;">11</div>
-                <div class="cards" id="card2_3" onclick="flipCard(2_3)" style="width: 24px;">12</div>
-                <div class="cards" id="card3_0" onclick="flipCard(3_0)" style="width: 24px;">13</div>
-                <div class="cards" id="card3_1" onclick="flipCard(3_1)" style="width:24px;">14</div>
-                <div class="cards" id="card3_2" onclick="flipCard(3_2)" style="width: 24px;">15</div>
-                <div class="cards" id="card3_3" onclick="flipCard(3_3)" style="width: 24px;">16</div>
+                <div class="cards" id="card0_0" style="width: 24px;"></div>
+                <div class="cards" id="card0_1" style="width:24px;"></div>
+                <div class="cards" id="card0_2" style="width: 24px;"></div>
+                <div class="cards" id="card0_3" style="width: 24px;"></div>
+                <div class="cards" id="card1_0" style="width: 24px;"></div>
+                <div class="cards" id="card1_1" style="width: 24px;"></div>
+                <div class="cards" id="card1_2" style="width: 24px;"></div>
+                <div class="cards" id="card1_3" style="width: 24px;"></div>
+                <div class="cards" id="card2_0" style="width: 24px;"></div>
+                <div class="cards" id="card2_1" style="width: 24px;"></div>
+                <div class="cards" id="card2_2" style="width: 24px;"></div>
+                <div class="cards" id="card2_3" style="width: 24px;"></div>
+                <div class="cards" id="card3_0" style="width: 24px;"></div>
+                <div class="cards" id="card3_1" style="width: 24px;"></div>
+                <div class="cards" id="card3_2" style="width: 24px;"></div>
+                <div class="cards" id="card3_3" style="width: 24px;"></div>
               </div>
            </div>
           </div>
           </div>
         <script>
+            document.getElementById("card0_0").onclick = function() {flipDat("0_0")};
+            document.getElementById("card0_1").onclick = function() {flipDat("0_1")};
+            document.getElementById("card0_2").onclick = function() {flipDat("0_2")};
+            document.getElementById("card0_3").onclick = function() {flipDat("0_3")};
+            document.getElementById("card1_0").onclick = function() {flipDat("1_0")};
+            document.getElementById("card1_1").onclick = function() {flipDat("1_1")};
+            document.getElementById("card1_2").onclick = function() {flipDat("1_2")};
+            document.getElementById("card1_3").onclick = function() {flipDat("1_3")};
+            document.getElementById("card2_0").onclick = function() {flipDat("2_0")};
+            document.getElementById("card2_1").onclick = function() {flipDat("2_1")};
+            document.getElementById("card2_2").onclick = function() {flipDat("2_2")};
+            document.getElementById("card2_3").onclick = function() {flipDat("2_3")};
+            document.getElementById("card3_0").onclick = function() {flipDat("3_0")};
+            document.getElementById("card3_1").onclick = function() {flipDat("3_1")};
+            document.getElementById("card3_2").onclick = function() {flipDat("3_2")};
+            document.getElementById("card3_3").onclick = function() {flipDat("3_3")};
             //This formatting could be better: Like the order of function and such (my fault, but it's a good job if frustrated and can't figure stuff out)
             //How do you choose the card that the user clicked? Use ids... maybe screw user-chosen board size?
-            var cardsFlipped = 0
-            var allCardsFlipped = 0
-            var cardsAreEqual = 0
+            var attemptNumber = 0;
+            var turnsUsed = 0;
+            var completedCards = 0;
+            var cardsAreEqual = 0;
             var lastCardFlipped = -1;
+            var lastCardFlippedID = "null";
             var boardObject = {
             };
             function getRandomInt(min, max) {
               return Math.floor(Math.random() * (max + 1 - min)) + min; //Since Math.random() goes between 0 and 1, I
                                                                        //edit it to go between min and max, inclusive.
             }
-                
-            pickGame();
+
+            //pickGame();
+            var Name = prompt("Please enter your name");
+            document.getElementById("NameBox").innerHTML = "Name: " + Name;
+
             setLevel1(); //call this in pickgame function?
             //Call this with a button: we'll have two buttons to select which
             //game we play.
+            
+            //I tried to make button but function is not defined... Help? Not very good with this
+            
             //We (Matthias and Derrick) were planning on having the memory game
             //where you get a sequence of cards in order and have to repeat
             //the selection, as well as the normal pair-up game.
-            function pickGame() {
-                var game = prompt("Pick a memory game: either Regular or Order Memory") //edit this if better phrasing
-                if (game=="Regular"){
-                    setLevel1();
-                }
-                else if (game=="Order Memory"){
-                    setLevel2();
-                }
-                else {
-                    alert("Check your Caps or spelling")
-                    function pickGame()
+            
                 
             
             
             //Functions for RegularMemory
             
-            function setLevel1()
+            function setLevel1() {
                 
             var numbArray = [0,1,2,3,4,5,6,7,8,9,10,11,12];
             var cardArray = [];
             
             for(var i = 0; i < 4;i++){
-              for var j = 0; j < 4; j++){
-                cardArray.push(["i","j"]);
+              for(var j = 0; j < 4; j++){
+                cardArray.push([i,j]);
               }
             }
-            console.log(cardArray); //These two should help keep track of which cards/numbers have been used
-            
+           
             var randInt1 = 0;
             var randInt2 = 0;
             var randInt3 = 0; //Keeps me from defining variables in a loop.
             
-            for(var i = 0; i < 8;i++){
+            for(var k = 0; k < 8;k++){
               
               randInt3 = getRandomInt(0,numbArray.length - 1);
-              numbArray.splice(randInt3); //This picks a number from the numbArray and removes it afterward.
+              
               
               randInt1 = getRandomInt(0,cardArray.length - 1);
-              boardObject["card" + cardArray[randInt1[0]] + "_" + cardArray[randInt1[1]]] = [randInt3 + 1, 0];
-              cardArray.splice(randInt1);
+              boardObject["card" + cardArray[randInt1][0] + "_" + cardArray[randInt1][1]] = [numbArray[randInt3] + 1, 0];
+              cardArray.splice(randInt1,1);
               
               randInt2 = getRandomInt(0,cardArray.length - 1);
-              boardObject["card" + cardArray[randInt2[0]] + "_" + cardArray[randInt2[1]]] = [randInt3 + 1, 0]
-              cardArray.splice(randInt2); //These two pick out two random cards from cardArray, then removes them from said array.
+              boardObject["card" + cardArray[randInt2][0] + "_" + cardArray[randInt2][1]] = [numbArray[randInt3] + 1, 0];
+              cardArray.splice(randInt2,1); //These two pick out two random cards from cardArray, then removes them from said array.
               
-    
+              numbArray.splice(randInt3,1); //This picks a number from the numbArray and removes it afterward.
             }
             console.log(boardObject.card0_0);
+            console.log(boardObject.card0_1);
+            console.log(boardObject.card0_2);
+            console.log(boardObject.card0_3);
+            console.log(boardObject.card1_0);
+            console.log(boardObject.card1_1);
+            console.log(boardObject.card1_2);
+            console.log(boardObject.card1_3);
+            console.log(boardObject.card2_0);
+            console.log(boardObject.card2_1);
+            console.log(boardObject.card2_2);
+            console.log(boardObject.card2_3);
+            console.log(boardObject.card3_0);
+            console.log(boardObject.card3_1);
+            console.log(boardObject.card3_2);
+            console.log(boardObject.card3_3);
+            
             //Hopefully the board should be set up now, with each attribute (card2_3) being an array of a random number
             //and whether it was flipped or not.
             }
             
-            function flipCard(CardId) {
-                //I've commented out a possible method to choosing the card that the user clicked
+            function flipDat(CardId) {
+              turnsUsed++;
+              document.getElementById("ClickBox").innerHTML = "Clicks Used: " + turnsUsed;
                 var yourCard = "card" + CardId;
                 //CardId is found above in the individual divs
+            if(boardObject[yourCard][1]==1){
+              document.getElementById(yourCard).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
+              boardObject[yourCard][1] = 0;
+              lastCardFlipped = -1;
+            } else {
             boardObject[yourCard][1] = 1;
             if (boardObject[yourCard][0] == lastCardFlipped){
               cardsAreEqual = 1;
             } else {
               cardsAreEqual = 0;
-              lastCardFlipped = boardObject["card" + i + "_" + j][0]; //This should detect if the current card is equivalent
+              lastCardFlipped = boardObject[yourCard][0]; //This should detect if the current card is equivalent
                                                                       //to the previous one
             }
-            //We need to sync up our variable names: here I just left it for now - ok lol what do u want 2 make it lol
-            //How do we tell what card is selected? idk I was wondering that also - I tried the method above
             
-            //Set attribute of card from 0 to 1 to show that it's flipped
+            //lastCardFlipped and lastCardFlippedID are 2 different variables
             
-            cardsFlipped = cardsFlipped + 1; //added some semicolons
-            "Total Cards Flipped: " + cardsFlipped = document.getElementById("totalFlips")
-            if (cardsFlipped % 2 = 0) {
-            checkMatch();
+            if (boardObject[yourCard][0] == 13){
+              document.getElementById(yourCard).style.backgroundImage="url(https://gambit1204.files.wordpress.com/2010/07/ace_spades1.jpg)"; //Ace
+            }else if (boardObject[yourCard][0] == 1){
+              document.getElementById(yourCard).style.backgroundImage="url(https://allaboutcards.files.wordpress.com/2009/06/king-clubs.png)"; //King
+            }else if (boardObject[yourCard][0] == 2){
+              document.getElementById(yourCard).style.backgroundImage="url(http://www.madore.org/~david/images/cards/english/queen-clubs.png)"; //Queen
+            }else if (boardObject[yourCard][0] == 3){
+              document.getElementById(yourCard).style.backgroundImage="url(https://t3.ftcdn.net/jpg/00/03/92/76/500_F_3927639_jF76K898642H7Zl2QIRvTlqKFT9G4qgd.jpg)"; //Jack
+            }else if (boardObject[yourCard][0] == 4){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Playing_card_club_10.svg/819px-Playing_card_club_10.svg.png)"; //10
+            }else if (boardObject[yourCard][0] == 5){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Playing_card_club_9.svg/614px-Playing_card_club_9.svg.png)"; //9
+            }else if (boardObject[yourCard][0] == 6){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Playing_card_heart_8.svg/819px-Playing_card_heart_8.svg.png)"; //8
+            }else if (boardObject[yourCard][0] == 7){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Playing_card_diamond_7.svg/819px-Playing_card_diamond_7.svg.png)"; //7
+            }else if (boardObject[yourCard][0] == 8){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Playing_card_spade_6.svg/819px-Playing_card_spade_6.svg.png)"; //6
+            }else if (boardObject[yourCard][0] == 9){
+              document.getElementById(yourCard).style.backgroundImage="url(http://spiritualnutrition.org/wp-content/uploads/2011/07/Diamonds-5.png)"; //5
+            }else if (boardObject[yourCard][0] == 10){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Playing_card_club_4.svg/819px-Playing_card_club_4.svg.png)"; //4
+            }else if (boardObject[yourCard][0] == 11){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Playing_card_club_3.svg/819px-Playing_card_club_3.svg.png)"; //3
+            }else if (boardObject[yourCard][0] == 12){
+              document.getElementById(yourCard).style.backgroundImage="url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Playing_card_heart_2.svg/819px-Playing_card_heart_2.svg.png)"; //2
             }
+
+            
+            document.getElementById("totalFlips").innerHTML = "Total Cards Flipped: " + turnsUsed;
+            if (turnsUsed % 2 === 0) {
+            checkMatch(lastCardFlippedID,yourCard);
+            lastCardFlippedID = "null";
+            } else {
+              lastCardFlippedID = yourCard;
+            }
+          }
         }
-        function checkMatch() {
-            if (cardsAreEqual = 1) {
-                clearCards();
-;            }
+        function checkMatch(card1,card2) {setTimeout(function(){
+            //if( $('img').css('background-image') == ('img').css('background-image') That's jQuery but it might work
+            if (cardsAreEqual == 1) {
+                clearCards(card1,card2);
+            }
             else {
-                flipCardToBack();
+                flipCardsToBack(card1,card2); 
             }
+           }, 1000)
         }
-            function clearCards() {
-            document.getElementById("")
-            //set boxsize to 0
-            element.setAttribute(size, 0)
+            function clearCards(card1,card2) {
+            document.getElementById(card2).style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg')";
+            document.getElementById(card1).style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg')";
+            //URL: https://upload.wikimedia.org/wikipedia/commons/8/80/Pink_Background.jpg
+            console.log("BLAHWEFAW");
+            completedCards = completedCards + 2;
+            //If this doesn't work try thingy.style.width (and one for height) = "0px"
             
-            if(allCardsFlipped = true){
+            if(completedCards==16){
             winScreen();
             }
             }
             //added some close curly braces here
             //Functions for OrderMemory Game
             
-            function setLevel2(){
-                alert("You will be shown 5 cards. Memorize them and be able to recite them to win!")
-                showCards();
-                flipCardToBack();
-                prompt("What were the cards? Only put the number of the card, with Aces as 1 and face cards as 11, 12, and 13 (e.g. Jack would be 11, King 13) Separate your #s with commas please!");
-                checkWin();
-            }
             function showCards(){
                 //set card's attribute from 0 to 1 to turn it over
             }
-        //Universal Functions
-        function checkWin(){
-                document.getElementsByClassName("cards");
-                var win = //If combined size of boxes is 0, you win - Maybe use class of Cards I gave everything?
-                if // Something like this?(cards.width = 0 && cards.height = 0) {
-                    winScreen();
-                }
-                else if {
-                    //playing memory game of yours
-                }
-                else if {
-                    //Got card order right - idk how to tell that eggsD
-                }
-                else {
-                    alert("Y O U ' R E A L O S E R")
-                }
-                //No Idea how to do this
-                cardsFlipped = 0
-                //set sizes of boxes/cards to normal again
+        
+        function flipCardsToBack(card1,card2) {
+            boardObject[card1][1]=0;
+            boardObject[card2][1]=0;
+            console.log("BLAHWEFAW");
+            if(attemptNumber === 0){
+            document.getElementById(card1).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
+            document.getElementById(card2).style.backgroundImage = "url('http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg')";
+            //URL: http://images6.fanpop.com/image/photos/36700000/blank-blue-kuroko-tetsuya-36720870-1024-768.jpg
+            } else {
+            document.getElementById(card1).style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById(card2).style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
             }
-            
-        
-        }
-        
-        function flipCardToBack() {
-            //set attribute of card from 1 to 0 to flip it back over
         }
         
         function winScreen() {
-            alert("You Won! :D")
+            alert("You Won! :D");
+            //http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif
             //reset stuff
-            cardsFlipped = 0;
-            allCardsFlipped = 0;
+            turnsUsed = 0;
+            completedCards = 0;
             cardsAreEqual = 0;
             lastCardFlipped = -1;
+            boardObject = {};
+            setLevel1();
+            attemptNumber++;
+            document.getElementById("WinBox").innerHTML = "Total Wins: " + attemptNumber;
+            document.getElementById("ClickBox").innerHTML = "Clicks Used: 0";
+            
+            document.getElementById("card0_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card0_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card1_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card2_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_0").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_1").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_2").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
+            document.getElementById("card3_3").style.backgroundImage = "url('http://25.media.tumblr.com/tumblr_mdgfpehkYN1r8cvzdo1_500.gif')";
         }
         
 </script>
@@ -361,36 +438,6 @@ div#memory_board > div{
 });
   }
   
-//Everything under here I was messing around; ignore (Is this Derrick or Derek? :))
-
-  // Get a reference to the database service
-  //   var database = firebase.database();
-  
-  // var userObject = ["Hello", "123"];
-  // var name = "Erik";
-  
-  //database.ref().child(name).set(userObject);
-  
-  
-  // database.ref().child("Erik").child("1").on("value", function(datasnapshot){
-  //   document.getElementById("test").innerHTML = datasnapshot.val();
-  // });
-  
-  
-// function user(first, last, username, age) {
-//   this.firstName = first;
-//   this.lastName = last;
-//   this.username = username;
-//   this.age = age;
-// }
-
-// var testUser = new user("Erik","Gundel","ErikGundel","30");
-// console.log(testUser.firstName)
-
-// database.ref().child(testUser.username).set(testUser);
-
-// var first = document.getElementById("first");
-
 </script>
     </body>
 </html>
